@@ -1,5 +1,6 @@
 mod ownership;
 mod option;
+mod compound;
 fn main() {
     println!("Hello, world!");
 }
