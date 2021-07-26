@@ -1,6 +1,10 @@
 mod ownership;
 mod option;
 mod compound;
+mod error;
+mod generics;
+mod function;
+
 fn main() {
     println!("Hello, world!");
 }

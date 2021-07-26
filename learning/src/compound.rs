@@ -1,7 +1,6 @@
-
 #[cfg(test)]
 mod tests {
-    use std::path::PrefixComponent;
+    use std::collections::HashMap;
 
     #[test]
     fn test_vector() {
@@ -112,5 +111,34 @@ mod tests {
         println!("{:?}", c);
 
         println!("{:?}", format!("{}-{}", c, b));
+    }
+
+    #[test]
+    fn test_hashmap() {
+        let mut h = HashMap::new();
+        h.insert(String::from("hello"), 1);
+        h.insert(String::from("world"), 1);
+
+        h.entry(String::from("wz")).or_insert(1);
+
+        println!("{:?}", h);
+
+        let teams = vec![String::from("hello"), String::from("world")];
+        let score = vec![10, 20];
+        
+        // iter 获得是 reference，所以 hashMap 中存储的是 reference
+        let scores :HashMap<_,_> = teams.iter().zip(score.iter()).collect();
+        println!("{:?}",scores);
+
+        let t = scores.get(&String::from("hello"));
+        if let Some(value) = t {
+            println!("{:?}", value);
+        }
+
+        for (k,v) in &scores {
+            println!("{:?}:{:?}",k, v);
+        }
+
+        println!("{:?}", scores);
     }
 }
