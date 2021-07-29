@@ -209,6 +209,6 @@ mod tests {
         print_it(a);
 
         let b = String::from("hello");
-        print_it(&b);
+        // print_it(&b);
     }
 }

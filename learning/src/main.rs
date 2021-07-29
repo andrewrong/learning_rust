@@ -4,6 +4,10 @@ mod compound;
 mod error;
 mod generics;
 mod function;
+mod iter;
+mod smart_pointer;
+mod thread;
+mod oop;
 
 fn main() {
     println!("Hello, world!");
