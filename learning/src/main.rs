@@ -8,6 +8,9 @@ mod iter;
 mod smart_pointer;
 mod thread;
 mod oop;
+mod unsafe_;
+mod advance;
+mod micro;
 
 fn main() {
     println!("Hello, world!");

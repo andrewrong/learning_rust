@@ -49,6 +49,7 @@ mod tests {
     use std::ops::DerefMut;
     use std::sync::Arc;
     use std::thread;
+    use dashmap::DashMap;
     use std::time::Duration;
     use super::*;
 
@@ -138,5 +139,15 @@ mod tests {
         }
 
         println!("Result: {}", *counter.lock().unwrap());
+    }
+
+    #[test]
+    fn test_dashmap() {
+        let map = DashMap::new();
+        map.insert("hello", "world");
+
+        for ele in map.iter() {
+            println!("k:{},v:{}", ele.key(), ele.value()); 
+        }
     }
 }

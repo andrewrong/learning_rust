@@ -10,9 +10,7 @@ fn get_largest_item<T>(list :&[T]) -> T
     let mut largest = list[0];    
 
     for ele in list.iter() {
-        if *ele > largest {
-            largest = *ele;
-        }
+        if *ele > largest { largest = *ele; }
     }
     largest
 }
@@ -105,6 +103,7 @@ fn polym2<T: MyDisplay>(impls :T) {
     println!("{}", impls.display());
 }
 
+
 //返回 trait 可行，但是不能返回不一样的两个实现，这个需要更加高级的语法
 // fn reture_trait(switch : bool) -> impl MyDisplay {
 //     if switch {
@@ -143,6 +142,54 @@ struct RefStruct<'a> {
 
 fn print_it(input : impl std::fmt::Debug + 'static) {
     println!("{:?}", input);
+}
+
+//相同函数名
+
+trait duck {
+    fn fly(&self);
+    fn fly2();
+}
+
+trait bird {
+    fn fly(&self);
+    fn fly2();
+}
+
+struct AA {
+
+}
+
+impl duck for AA {
+    fn fly(&self) {
+        println!("duck");
+    }
+
+    fn fly2() {
+        println!("duck2");
+    }
+    
+}
+
+impl bird for AA {
+    fn fly(&self) {
+        println!("bird");
+    }
+
+    fn fly2() {
+        println!("bird2");
+    }
+    
+}
+
+impl AA {
+    fn fly(&self)  {
+        println!("self");
+    }
+
+    fn fly2() {
+        println!("self2");
+    }
 }
 
 #[cfg(test)]
@@ -210,5 +257,26 @@ mod tests {
 
         let b = String::from("hello");
         // print_it(&b);
+    }
+
+    #[test]
+    fn test_multi_func() {
+        let a = AA{};
+        a.fly();
+
+        AA::fly(&a);
+
+        // 这个告知我们其实方法本身没有任何的特殊性，只不过有的时候会有一些语法糖而已
+        duck::fly(&a);
+        bird::fly(&a);
+        
+        // self2
+        AA::fly2();
+
+        // bird2
+        <AA as bird>::fly2();
+
+        //duck3
+        <AA as duck>::fly2();
     }
 }
